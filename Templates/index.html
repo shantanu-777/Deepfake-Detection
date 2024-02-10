@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #000; 
+        }
+
+        .main-frame {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('AI-artificial-intelligence-robot-machine-learning-cyber-mind-shut.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative; 
+        }
+
+        .content {
+            position: absolute; 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1; 
+        }
+
+        h1 {
+            margin-bottom: 20px; 
+            color: #fff; 
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto; 
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card-grid:hover {
+            transform: scale(1.02);
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            perspective: 1000px; 
+        }
+
+        .card:hover {
+            transform: rotateY(10deg); 
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: calc(100% - 16px);
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            z-index: 1; 
+        }
+
+        p.success {
+            color: #28a745;
+        }
+
+        p.error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-frame">
+        <div class="content">
+            <h1>Deepfake Detection</h1>
+            <div class="card-grid">
+                <div class="card" style="background-color: #AED9E0;">
+                    <h2>Upload Video</h2>
+                    <form id="uploadVideoForm" enctype="multipart/form-data" action="{% url 'detect_deepfake_video' %}" method="post">
+                        {% csrf_token %}
+                        <input type="file" name="video" accept="video/*" required>
+                        <button type="submit">Check for Deepfake</button>
+                    </form>
+                </div>
+            
+                <div class="card" style="background-color: #C7CEEA;">
+                    <h2>Upload Image</h2>
+                    <form id="uploadImageForm" enctype="multipart/form-data" action="{% url 'detect_deepfake_image' %}" method="post">
+                        {% csrf_token %}
+                        <input type="file" name="image" accept="image/*" required>
+                        <button type="submit">Check for Deepfake</button>
+                    </form>
+                </div>
+            
+                <div class="card" style="background-color: #F8D7DA;">
+                    <h2>Upload Other File</h2>
+                    <form id="uploadOtherForm" enctype="multipart/form-data" action="{% url 'detect_deepfake_other' %}" method="post">
+                        {% csrf_token %}
+                        <input type="file" name="otherfile" required>
+                        <button type="submit">Check for Deepfake</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="result">
+                {% if result %}
+                    <p class="{{ result_class }}">{{ result }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
