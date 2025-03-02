@@ -117,7 +117,5 @@ For any inquiries or support, feel free to reach out:
 Thank you for checking out **Deepfake Detection**! 🌟 If you found this project helpful, please leave a star ⭐ on the repository.
 ```
 
-### Instructions:
-- Copy the above content into the `README.md` file for your `Deepfake-Detection` project.
-- Replace placeholders like `<your-secret-key>` with your actual environment variables.
+
 
